@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mis Datasets</title>
+</head>
+<body>
+    <h1>Mis Datasets</h1>
+    
+    <!-- Listar los archivos -->
+    <ul>
+    {% for file in files %}
+        <li>
+            {{ file }}
+            <!-- Agrega un botón para previsualizar el archivo -->
+            <form action="{{ url_for('preview_file', filename=file) }}" method="post" style="display:inline;">
+                <input type="submit" value="Previsualizar">
+            </form>
+            {% if file.endswith('.csv') %}
+                <p>Filas/Instancias: {{ file_stats[file]['num_rows'] }} ---- Columnas/Atributos: {{ file_stats[file]['num_columns'] }}</p>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <h2>Subir un nuevo archivo</h2>
+    <form action="/my_datasets" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Subir">
+    </form>
+
+    <!-- Aquí puedes mostrar la previsualización del archivo -->
+    <div id="preview">
+        <!-- El contenido de la previsualización se mostrará aquí -->
+    </div>
+
+    <a href="/">Volver al inicio</a>
+</body>
+</html>

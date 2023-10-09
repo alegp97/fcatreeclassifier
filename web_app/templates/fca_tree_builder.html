@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FCA Tree Builder</title>
+
+</head>
+<body>
+    <div class="container">
+        <h1>FCA Tree Builder</h1>
+
+        <a href="/">Volver al inicio</a>
+
+        <br>
+        <br>
+
+        <form action="/build-Tree" method="post" enctype="multipart/form-data">
+
+            <label for="file">Elije un fichero csv:</label>
+            <select name="file">
+                {% for file in files %}
+                    <option value="{{ file }}">{{ file }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <br>
+            <input type="reset" value="Borrar todo">
+            <br>
+            <br>
+            <label for="target_colum">Introduce el número indice de la columna objetivo (por defecto se escogerá la última):</label>
+            <input type="number" step="1" min="1" max="100000" name="target_colum" >
+            <input type="button" value="Borrar" onclick="borrarCampo()">
+            <br>
+            <br>
+
+            <label for="test_size">Tamaño del conjunto de test (por ej., 0.2 para 20%):</label>
+            <input type="number" step="0.01" min="0.01" max="0.99" name="test_size" placeholder="0.2" value="0.2">
+            <br>
+            <br>
+            <label for="cross_validation">Parámetro de cross_validation:</label>
+            <input type="number" step="1" min="1" max="100" name="cross_validation" placeholder="1" value="1">
+            <label for="random_state">Parámetro de random_state:</label>
+            <input type="number" step="1" min="1" max="1000" name="random_state" placeholder="42" value="42">
+
+            <label for="discretizer">Selecciona un discretizador de datos:</label>
+            <select id="discretizer" name="discretizer">
+                <option value="equal-width">equal-width</option>
+                <option value="equal-frequency">equal-frequency</option>
+                <option value="kmeans">kmeans</option>
+                <option value="binarizer">binarizer</option>
+                <option value="quantile-transformer">quantile-transformer</option>
+            </select>
+            <br>
+
+            <input type="submit" value="Construir Árbol y comparar">
+        </form>
+
+
+    </div>
+
+
+</body>
+</html>
+
